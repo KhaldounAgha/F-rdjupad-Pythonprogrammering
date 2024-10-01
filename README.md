@@ -29,3 +29,20 @@ Exception Handling:
 Usage:
 Run it after specifying the file path of the dataset. 
 The output will be a cleaned DataFrame that will be saved as a CSV file.
+
+
+About the dataset: 
+A part of a dataset from a study that focus on analyzing factors that may influence students' academic performance, particularly in subjects like math, reading, and writing. The attributes provided suggest that the study could be examining how demographic and socio-economic factors (such as gender, race/ethnicity, and parental education level) as well as school-related factors (like lunch type and participation in test preparation courses) impact students' test scores.
+
+Column Information:
+    gender:	The gender of the student (male/female)
+    race/ethnicity:	The race/ethnicity of the student
+    parental level of education:	The education level of the student's parent
+    lunch:	Whether the student has opted for standard or the free/reduced lunch offer
+    test preparation course:	Whether a student has completed the test preperation course or not
+    math score:	The student's score achieved in math
+    reading score:	The student's score achived in reading
+    writing score:	The student's score achived in writing
+    Date: The date when the data was collected or represent the timing of the exams.
+
+Downloaded from: https://www.kaggle.com/code/rotichbrian/students-performance-analysis-eda-and-ml
