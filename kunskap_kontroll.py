@@ -355,31 +355,7 @@ class DataCleaner:
         self.df = df
         return self.df
 
-    def parse_date(self, date_string: str) -> dt.datetime:
-        """
-        Parse a date string using multiple formats.
-        Args: date_string (str): The date string to parse.
-        Returns: dt.datetime: Parsed datetime object if successful, date_string (str) if not.
-        """
-        date_formats = [
-            "%d.%m.%Y",  # for "15.03.2020"
-            "%d%m%Y",    # for "15032020"
-            "%d/%m/%Y",  # for "15/03/2020"
-            "%d-%m-%Y",  # for "15-03-2020"
-            "%m/%d/%Y",  # for "03/15/2020"
-            "%Y/%m/%d"   # for "2020/03/15"
-        ]
-
-        for fmt in date_formats:
-            try:
-                return dt.datetime.strptime(date_string, fmt)
-            except ValueError:
-                continue
-        
-        logging.warning(f"Unable to parse date: {date_string}")
-
-        return date_string
-
+    
     def process_date_column(self) -> pd.DataFrame:
         """
         Process the 'date' column in a DataFrame to standardize date format.
@@ -387,8 +363,33 @@ class DataCleaner:
         """
         df = self.df
         
+        def parse_date(date_string: str) -> dt.datetime:
+            """
+            Parse a date string using multiple formats.
+            Args: date_string (str): The date string to parse.
+            Returns: dt.datetime: Parsed datetime object if successful, date_string (str) if not.
+            """
+            date_formats = [
+                "%d.%m.%Y",  # for "15.03.2020"
+                "%d%m%Y",    # for "15032020"
+                "%d/%m/%Y",  # for "15/03/2020"
+                "%d-%m-%Y",  # for "15-03-2020"
+                "%m/%d/%Y",  # for "03/15/2020"
+                "%Y/%m/%d"   # for "2020/03/15"
+            ]
+
+            for fmt in date_formats:
+                try:
+                    return dt.datetime.strptime(date_string, fmt)
+                except ValueError:
+                    continue
+            
+            logging.warning(f"Unable to parse date: {date_string}")
+
+            return date_string
+        
         df["date"] = df["date"].astype(str)
-        df["date"] = df["date"].apply(self.parse_date)
+        df["date"] = df["date"].apply(parse_date)
         df["date"] = df["date"].apply(lambda val: dt.datetime.strftime(val, "%Y-%m-%d") if isinstance(val, dt.datetime) else val)
         
         self.df = df
@@ -426,8 +427,3 @@ if __name__ == "__main__":
     except Exception as per:
         logging.error(f"File processing ERROR occered: [{per}]")
     
-        
-
-
-
-# %%
