@@ -1,6 +1,5 @@
 # Fordjupad-Pythonprogrammering
-Kunskapskontroll Fördjupad Pythonprogrammering
-Data Cleaning Pipeline
+
 This Kunskapskontroll Python script is designed to clean and preprocess a dataset related to student performance. It is primarily focusing on ensuring that the dataset is properly formatted for further analysis or database updates. The script uses the DataCleaner class to perform a series of cleaning operations on a CSV file.
 
 Design: The cleaning operations are implemented within a class. 
